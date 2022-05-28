@@ -1,5 +1,5 @@
 import React from 'react';
-import pokeball from '../icons/pokeball.svg'
+import pokeball from '../icons/pokeballBW.svg'
 
 const LoadingPage = () => {
   return (

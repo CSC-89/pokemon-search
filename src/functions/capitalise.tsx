@@ -1,5 +1,5 @@
 
-    export const capitalise = (str: string) => {
+    const capitalise = (str: string) => {
         if(str.length > 0) {
         const splitArr = str.split("")
         splitArr[0] = splitArr[0].toUpperCase();
@@ -7,3 +7,5 @@
         }
         return "null"
     }
+
+    export default capitalise
