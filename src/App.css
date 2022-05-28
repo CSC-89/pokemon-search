@@ -2,13 +2,13 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+.load-logo {
+  height: 3.5em;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+  .load-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
