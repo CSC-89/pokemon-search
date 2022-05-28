@@ -4,15 +4,7 @@ import SearchBox from "./SearchBox";
 
 import axios from "axios";
 import LoadingPage from "./LoadingPage";
-
-interface Pokemon {
-  id: number;
-  name: string;
-  types: Array<string>;
-  image: string;
-  moves: Array<string | number>[];
-  abilities: Array<string | number> [];
-}
+import { Pokemon } from "../interfaces";
 
 const Main = () => {
   class PokeTemplate implements Pokemon {
@@ -126,7 +118,6 @@ const Main = () => {
   };
   ////
 
-  console.log(pokemon);
   return (
     <>
       <SearchBox submitName={onSubmitName} submitNumber={onSubmitNumber} />
