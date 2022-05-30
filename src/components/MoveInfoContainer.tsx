@@ -35,10 +35,12 @@ const MoveInfoContainer = (props: MoveListProps) => {
   console.log(move);
 
   return (
-    <div className="fixed  mx-auto w-full border-2 border-slate-200 top-1 left-3  max-w-sm max-h-auto mb-5 rounded overflow-scroll shadow-xl bg-slate-50">
+    <>
+    {/** A popup-window component that can be opened and closed via "SelectedMove" state in InfoContainer */}
+    <div className="fixed mx-auto w-full border-2 border-slate-200 top-1 left-3 max-w-sm max-h-auto mb-5 rounded overflow-scroll shadow-xl bg-slate-50">
       <div className="flex">
         <h1 className="bg-blue-200 pt-2 pb-2 w-full">
-          {transformText(move.name)}
+          {transformText(move.name)} <span>(#{move.id})</span>
         </h1>
         <button onClick={closeHandler} className="absolute top-1">
           {crossSVG}
@@ -54,10 +56,13 @@ const MoveInfoContainer = (props: MoveListProps) => {
         </div>
         <div className="mt-3 mx-auto text-md overflow-scroll h-96 rounded shadow-inner border p-2 mb-3">
           {move.effectEntries}
+          {/** Some "Effect Entries" data is fairly rough, and hasn't been cleaned. 
+            For Example "Pokemon: Meowstic Male (#678) - Move: Secret Power"*/}
         </div>
       </div>
       <img src={pokeball} className="mx-auto w-10 mb-3" alt="pokeball" />
     </div>
+    </>
   );
 };
 

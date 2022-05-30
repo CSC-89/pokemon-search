@@ -42,22 +42,24 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
   const clickMoveHandler = (e: any) => {
     e.preventDefault();
 
+    //Merge both arrays together to be filtered through
     const movesAndAbilities = [...pokemon.moves, ...pokemon.abilities];
 
-    movesAndAbilities.filter((elem: any) => {
+    const selected = movesAndAbilities.filter((elem: any) => {
       const str: string = transformText(elem.name);
 
-      if (str === e.target.outerText) {
-        setSelectedMove({
-          selected: true,
-          id: elem.id,
-          name: elem.name,
-          effectEntries: elem.effectEntries,
-          accuracy: elem.accuracy,
-          damageClass: elem.damageClass,
-        });
-      }
+      return str === e.target.outerText
     });
+
+    //Push Selected Move into new object & state
+    setSelectedMove({
+      selected: true,
+      id: selected[0].id,
+      name: selected[0].name,
+      effectEntries: selected[0].effectEntries,
+      accuracy: selected[0].accuracy,
+      damageClass: selected[0].damageClass
+    })
   };
 
   const onClose = () => {
@@ -67,7 +69,8 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
   return (
     <>
       <div className="container mt-5 mx-auto text-center grid justify-center">
-        {/** Pokemon Info Section */}
+
+        {/** POKEMON INFO Section */}
         <div className="mb-5 rounded overflow-hidden shadow-lg bg-slate-50 h-fit">
           <img
             id="image"
@@ -82,7 +85,8 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
             <div className="mx-auto font-bold text-l"># {pokemon.id}</div>
           </div>
           <div className="mx-auto pb-2">
-            {/**Map through types array */}
+
+            {/**Map through TYPES array */}
             {pokemon.types.map((elem: string, index: number) => {
               return (
                 <span
@@ -100,7 +104,8 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
         <div className="w-full mx-auto max-w-sm mb-5 rounded overflow-hidden shadow-lg bg-slate-50">
           <h1 className="bg-blue-200 pt-2 pb-2">Moves List</h1>
           <div className="px-6 py-4">
-            {/** Map through moves array */}
+
+            {/** Map through MOVES array */}
             {pokemon.moves.map((elem: any, index: number) => {
               return (
                 <button key={index} onClick={clickMoveHandler}>
@@ -116,7 +121,7 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
               <b>-Abilities-</b>
             </h3>
 
-            {/**Map through Abilities array */}
+            {/**Map through ABILITIES array */}
             {pokemon.abilities.length ? (
               pokemon.abilities.map((elem: any, index: number) => {
                 return (
@@ -135,8 +140,9 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
           </div>
         </div>
 
-        {/** Moves List section 
-          Display move/Ability info */}
+        {/** Pop-up window
+          Display MOVE/ ABILITY info
+           */}
         {selectedMove.selected && (
           <MoveInfoContainer move={selectedMove} onClose={onClose} />
         )}

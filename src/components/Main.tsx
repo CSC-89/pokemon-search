@@ -6,6 +6,17 @@ import axios from "axios";
 import LoadingPage from "./LoadingPage";
 import { Pokemon } from "../interfaces";
 
+/** 
+  Pokemon Tech Challenge
+  Tasks: 
+  1. Fetch a random pokemon when the user is starting the app, the app should display the pokemon’s name, type, image and moves.
+  2. Create a search field that let’s the user search for a pokemon, if you find a result display the same attributes as in the previous task.
+
+  Requirements:
+  1. The application must be built with react and typescript.
+  2. Styling be done in tailwind (optional).
+ */
+
 const Main = () => {
   class PokeTemplate implements Pokemon {
     constructor(
@@ -77,6 +88,7 @@ const Main = () => {
           });
         });
 
+        //Set all collected data into a new object
         const selectedPokemon = new PokeTemplate(
           response.data.id,
           response.data.name,
@@ -86,6 +98,7 @@ const Main = () => {
           abilitiesArr
         );
 
+        // Push to state
         await setPokemon(selectedPokemon);
       })
       .catch((e) => {
@@ -94,6 +107,7 @@ const Main = () => {
         );
       });
       await setTimeout(() => {
+        //Avoid async load issues by setting a timeout for the load status change.
         setLoadStatus(true);
       }, 1000)
     
@@ -120,6 +134,7 @@ const Main = () => {
 
   return (
     <>
+      {/*Search is constantly in view. Other components are conditional to the load status. */}
       <SearchBox submitName={onSubmitName} submitNumber={onSubmitNumber} />
       {!loadStatus && <LoadingPage />}
       {loadStatus && <InfoContainer pokemon={pokemon} />}
