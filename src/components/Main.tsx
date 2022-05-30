@@ -95,7 +95,7 @@ const Main = () => {
       });
       await setTimeout(() => {
         setLoadStatus(true);
-      }, 300)
+      }, 1000)
     
   };
 

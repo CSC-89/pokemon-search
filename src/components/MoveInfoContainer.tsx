@@ -1,11 +1,12 @@
 import React from "react";
+import capitalise from "../functions/capitalise";
 import transformText from "../functions/transformText";
 import pokeball from "../icons/pokeballBW.svg";
 import { MoveInterface } from "../interfaces";
 
 interface MoveListProps {
   move: MoveInterface;
-  onClose: Function
+  onClose: Function;
 }
 
 const crossSVG: JSX.Element = (
@@ -28,11 +29,13 @@ const MoveInfoContainer = (props: MoveListProps) => {
   const move = props.move;
 
   const closeHandler = () => {
-    props.onClose()
-  }
+    props.onClose();
+  };
+
+  console.log(move);
 
   return (
-    <div className="fixed md:relative md:mx-auto w-full border-2 border-slate-200 left-3 md:left-0 max-w-sm mb-5 rounded overflow-hidden shadow-xl bg-slate-50">
+    <div className="fixed  mx-auto w-full border-2 border-slate-200 top-1 left-3  max-w-sm max-h-auto mb-5 rounded overflow-scroll shadow-xl bg-slate-50">
       <div className="flex">
         <h1 className="bg-blue-200 pt-2 pb-2 w-full">
           {transformText(move.name)}
@@ -42,22 +45,18 @@ const MoveInfoContainer = (props: MoveListProps) => {
         </button>
       </div>
       <div className="px-6 py-4">
-                  {/* {move.map((elem: string, index: number) => {
-            return (
-              <span
-                key={index}
-                className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >
-                {capitalise(elem)}
-              </span>
-            );
-          })} */}
+        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+          {move.damageClass ? capitalise(move.damageClass.name) : "Ability"}
+        </span>
+
         <div className="mx-auto font-bold text-l">
-          Accuracy: {move.accuracy}
+          Accuracy: {move.accuracy ? move.accuracy : "N/A"}
         </div>
-        <div className="mt-3 mx-auto text-md">{move.effectEntries}</div>
-        <img src={pokeball} className="mt-3 mx-auto w-10" alt="pokeball" />
+        <div className="mt-3 mx-auto text-md overflow-scroll h-96 rounded shadow-inner border p-2 mb-3">
+          {move.effectEntries}
+        </div>
       </div>
+      <img src={pokeball} className="mx-auto w-10 mb-3" alt="pokeball" />
     </div>
   );
 };
