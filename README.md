@@ -1,4 +1,16 @@
-# Getting Started with Create React App
+## Pokemon Tech Challenge
+  # Tasks: 
+  1. Fetch a random pokemon when the user is starting the app, the app should display the pokemon’s name, type, image and moves.
+  2. Create a search field that let’s the user search for a pokemon, if you find a result display the same attributes as in the previous task.
+
+  # Requirements:
+  1. The application must be built with react and typescript.
+  2. Styling be done in tailwind (optional).
+
+-----------
+-----------
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
