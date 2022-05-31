@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import InfoContainer from "./InfoContainer";
-import SearchBox from "./SearchBox";
+import InfoContainer from "../InfoContainer";
+import SearchBox from "../SearchBox";
 
 import axios from "axios";
-import LoadingPage from "./LoadingPage";
-import { Pokemon } from "../interfaces";
+import LoadingPage from "../LoadingPage";
+import { Pokemon } from "../../interfaces";
+
+import './Main.css'
 
 /** 
   Pokemon Tech Challenge
@@ -53,13 +55,14 @@ const Main = () => {
     await axios
       .get(`https://pokeapi.co/api/v2/pokemon/${input}/`)
       .then(async (response) => {
-        const typesArr: Array<string> = [];
+        const typesArr: Array<any> = [];
         const movesArr: Array<any> = [];
         const abilitiesArr: Array<any> = [];
 
         //Find the "types" and push them to a new array
         await response.data.types.forEach((elem: any) => {
-          typesArr.push(elem.type.name);
+          typesArr.push({name: elem.type.name,
+          color: `bg-${elem.type.name}`});
         });
 
         //Find the "moves" and push them to a new array
@@ -111,6 +114,7 @@ const Main = () => {
         setLoadStatus(true);
       }, 1000)
     
+      clearTimeout()
   };
 
   useEffect(() => {

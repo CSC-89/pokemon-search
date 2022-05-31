@@ -40,7 +40,7 @@ const MoveInfoContainer = (props: MoveListProps) => {
     <div className="fixed mx-auto w-full border-2 border-slate-200 top-1 left-3 max-w-sm max-h-auto mb-5 rounded overflow-scroll shadow-xl bg-slate-50">
       <div className="flex">
         <h1 className="bg-blue-200 pt-2 pb-2 w-full">
-          {transformText(move.name)} <span>(#{move.id})</span>
+        <span>{move.id}:</span> {transformText(move.name)}
         </h1>
         <button onClick={closeHandler} className="absolute top-1">
           {crossSVG}

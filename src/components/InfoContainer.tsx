@@ -71,7 +71,7 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
       <div className="container mt-5 mx-auto text-center grid justify-center">
 
         {/** POKEMON INFO Section */}
-        <div className="mb-5 rounded overflow-hidden shadow-lg bg-slate-50 h-fit">
+        <div className="mb-5 rounded overflow-hidden shadow-lg bg-slate-50">
           <img
             id="image"
             className="mx-auto"
@@ -87,13 +87,13 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
           <div className="mx-auto pb-2">
 
             {/**Map through TYPES array */}
-            {pokemon.types.map((elem: string, index: number) => {
+            {pokemon.types.map((elem: any, index: number) => {
               return (
                 <span
                   key={index}
-                  className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                  className={`inline-block ${elem.color} rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2`}
                 >
-                  {capitalise(elem)}
+                  {capitalise(elem.name)}
                 </span>
               );
             })}
