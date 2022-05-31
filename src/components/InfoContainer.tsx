@@ -49,7 +49,7 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
     const selected = movesAndAbilities.filter((elem: any) => {
       const str: string = transformText(elem.name);
 
-      return str === e.target.outerText
+      return str === e.target.outerText;
     });
 
     //Push Selected Move into new object & state
@@ -59,8 +59,8 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
       name: selected[0].name,
       effectEntries: selected[0].effectEntries,
       accuracy: selected[0].accuracy,
-      damageClass: selected[0].damageClass
-    })
+      damageClass: selected[0].damageClass,
+    });
   };
 
   const onClose = () => {
@@ -69,20 +69,19 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
 
   const getNextorPrevHandler = (e: any) => {
     e.preventDefault();
-    console.log(e)
-    if(e.target.name === "next") {
-    props.getNextorPrev(pokemon.id + 1);
-    return
+    console.log(e);
+    if (e.target.name === "next") {
+      props.getNextorPrev(pokemon.id + 1);
+      return;
     } else if (e.target.name === "prev") {
       props.getNextorPrev(pokemon.id - 1);
-      return
+      return;
     }
   };
 
   return (
     <>
       <div className="container mt-5 mx-auto text-center grid justify-center">
-
         {/** POKEMON INFO Section */}
         <div className="mb-5 rounded overflow-hidden shadow-lg bg-slate-50">
           <img
@@ -99,24 +98,44 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
           </div>
           <div className="mx-auto pb-2">
             <div className="flex justify-between">
-              <button name="prev" className="bg-blue-200 px-4 py-2 mx-2 rounded shadow-md mb-2" type="button" onClick={getNextorPrevHandler}>PREV</button>
+              {pokemon.id > 1 ? (
+                <button
+                  name="prev"
+                  className="bg-blue-200 px-4 py-2 mx-2 rounded shadow-md mb-2"
+                  type="button"
+                  onClick={getNextorPrevHandler}
+                >
+                  PREV
+                </button>
+              ) : (
+                <div className="px-5 p-5 rounded  mb-2 mx-5"></div>
+              )}
               <div>
                 {/**Map through TYPES array */}
-{pokemon.types.map((elem: any, index: number) => {
-              return (
-                <span
-                  key={index}
-                  className={`inline-block ${elem.color} rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2`}
+                {pokemon.types.map((elem: any, index: number) => {
+                  return (
+                    <span
+                      key={index}
+                      className={`inline-block ${elem.color} rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2`}
+                    >
+                      {capitalise(elem.name)}
+                    </span>
+                  );
+                })}
+              </div>
+              {pokemon.id < 898 ? (
+                <button
+                  name="next"
+                  className="bg-blue-200 px-4 py-2 mx-2 rounded shadow-md mb-2"
+                  type="button"
+                  onClick={getNextorPrevHandler}
                 >
-                  {capitalise(elem.name)}
-                </span>
-              );
-            })}
+                  NEXT
+                </button>
+              ) : (
+                <div className="px-5 p-5 rounded  mb-2 mx-5"></div>
+              )}
             </div>
-            <button name="next" className="bg-blue-200 px-4 py-2 mx-2 rounded shadow-md mb-2" type="button" onClick={getNextorPrevHandler}>NEXT</button>
-            </div>
-
-            
           </div>
         </div>
 
@@ -124,7 +143,6 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
         <div className="w-full mx-auto max-w-sm mb-5 rounded overflow-hidden shadow-lg bg-slate-50">
           <h1 className="bg-blue-200 pt-2 pb-2">Moves List</h1>
           <div className="px-6 py-4">
-
             {/** Map through MOVES array */}
             {pokemon.moves.map((elem: any, index: number) => {
               return (

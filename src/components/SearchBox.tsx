@@ -67,7 +67,9 @@ const SearchBox = (props: searchProps) => {
             <button className="ml-3 z-0" type="submit">
               {svgArrow}
             </button>
-            <h6 className="mb-5 text-sm"><em>*Choose between 1 - 898</em></h6>
+            <h6 className="mb-5 text-sm">
+              <em>*Choose between 1 - 898</em>
+            </h6>
           </form>
         </div>
       </div>
