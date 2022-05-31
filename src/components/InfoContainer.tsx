@@ -7,6 +7,7 @@ import { Pokemon, MoveInterface } from "../interfaces";
 
 interface PokeProps {
   pokemon: Pokemon;
+  getNextorPrev: Function;
 }
 
 class SelectedMove implements MoveInterface {
@@ -66,6 +67,18 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
     setSelectedMove(new SelectedMove(false));
   };
 
+  const getNextorPrevHandler = (e: any) => {
+    e.preventDefault();
+    console.log(e)
+    if(e.target.name === "next") {
+    props.getNextorPrev(pokemon.id + 1);
+    return
+    } else if (e.target.name === "prev") {
+      props.getNextorPrev(pokemon.id - 1);
+      return
+    }
+  };
+
   return (
     <>
       <div className="container mt-5 mx-auto text-center grid justify-center">
@@ -85,9 +98,11 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
             <div className="mx-auto font-bold text-l"># {pokemon.id}</div>
           </div>
           <div className="mx-auto pb-2">
-
-            {/**Map through TYPES array */}
-            {pokemon.types.map((elem: any, index: number) => {
+            <div className="flex justify-between">
+              <button name="prev" className="bg-blue-200 px-4 py-2 mx-2 rounded shadow-md mb-2" type="button" onClick={getNextorPrevHandler}>PREV</button>
+              <div>
+                {/**Map through TYPES array */}
+{pokemon.types.map((elem: any, index: number) => {
               return (
                 <span
                   key={index}
@@ -97,6 +112,11 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
                 </span>
               );
             })}
+            </div>
+            <button name="next" className="bg-blue-200 px-4 py-2 mx-2 rounded shadow-md mb-2" type="button" onClick={getNextorPrevHandler}>NEXT</button>
+            </div>
+
+            
           </div>
         </div>
 

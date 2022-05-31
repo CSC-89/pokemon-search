@@ -136,12 +136,17 @@ const Main = () => {
   };
   ////
 
+  const getNextorPrev = async (num: number) => {
+    await setLoadStatus(false);
+    fetchPokemon(num);
+  };
+
   return (
     <>
       {/*Search is constantly in view. Other components are conditional to the load status. */}
       <SearchBox submitName={onSubmitName} submitNumber={onSubmitNumber} />
       {!loadStatus && <LoadingPage />}
-      {loadStatus && <InfoContainer pokemon={pokemon} />}
+      {loadStatus && <InfoContainer getNextorPrev={getNextorPrev} pokemon={pokemon} />}
     </>
   );
 };
