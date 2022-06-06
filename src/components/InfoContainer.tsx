@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import capitalise from "./../functions/capitalise";
 import transformText from "./../functions/transformText";
 import pokeball from "../icons/pokeballBW.svg";
 import MoveInfoContainer from "./MoveInfoContainer";
@@ -92,7 +91,7 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
           />
           <div className="mx-auto px-6 py-4">
             <div className="mx-auto font-bold text-xl">
-              {capitalise(pokemon.name)}
+              {transformText(pokemon.name)}
             </div>
             <div className="mx-auto font-bold text-l"># {pokemon.id}</div>
           </div>
@@ -118,7 +117,7 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
                       key={index}
                       className={`inline-block ${elem.color} rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2`}
                     >
-                      {capitalise(elem.name)}
+                      {transformText(elem.name)}
                     </span>
                   );
                 })}
