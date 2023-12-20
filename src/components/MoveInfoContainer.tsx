@@ -1,12 +1,7 @@
 import React, { FC } from "react";
 import transformText from "../functions/transformText";
 import pokeball from "../icons/pokeballBW.svg";
-import { MoveInterface } from "../interfaces";
-
-interface MoveListProps {
-  move: MoveInterface;
-  onClose: Function;
-}
+import { MoveSelection } from "../types";
 
 const crossSVG: JSX.Element = (
   <svg
@@ -24,13 +19,16 @@ const crossSVG: JSX.Element = (
   </svg>
 );
 
+type MoveListProps = {
+  move: MoveSelection;
+  onClose: Function;
+}
+
 const MoveInfoContainer: FC<MoveListProps> = ({move, onClose}) => {
 
   const closeHandler = () => {
     onClose();
   };
-
-  console.log(move.data);
 
   return (
     <>

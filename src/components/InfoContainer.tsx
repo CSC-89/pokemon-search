@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import transformText from "./../functions/transformText";
 import pokeball from "../icons/pokeballBW.svg";
 import MoveInfoContainer from "./MoveInfoContainer";
-import { Pokemon, MoveInterface } from "../interfaces";
+import { Pokemon, MoveSelection, Move } from "../types";
 
 interface PokeProps {
   pokemon: Pokemon;
@@ -21,7 +21,7 @@ interface PokeProps {
 // };
 
 const InfoContainer = (props: PokeProps): JSX.Element => {
-  const [selectedMove, setSelectedMove] = useState<MoveInterface>({selected: false});
+  const [selectedMove, setSelectedMove] = useState<MoveSelection>({selected: false});
 
   const pokemon: Pokemon = props.pokemon;
 
@@ -32,7 +32,7 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
     e.preventDefault();
     const movesAndAbilities = [...pokemon.moves, ...pokemon.abilities];
 
-    const selected = movesAndAbilities.filter((elem: any) => {
+    const selected = movesAndAbilities.filter((elem: Move): boolean => {
       let button = e.target as HTMLButtonElement;
       const str: string = transformText(elem.name);
 
