@@ -1,3 +1,8 @@
+type DamageClass = {
+  name: string,
+  url: string
+}
+
 export interface Pokemon {
   id: number;
   name: string;
@@ -9,9 +14,11 @@ export interface Pokemon {
 
 export interface MoveInterface {
   selected: boolean;
-  id?: number;
-  name?: string;
-  effectEntries?: string;
-  accuracy?: number;
-  damageClass?: any;
+  data?: {
+    id: number;
+    name: string;
+    effectEntries: string;
+    accuracy: number;
+    damageClass: DamageClass;
+  }
 }

@@ -113,8 +113,6 @@ const Main = () => {
         //Avoid async load issues by setting a timeout for the load status change.
         setLoadStatus(true);
       }, 1000)
-    
-      clearTimeout()
   };
 
   useEffect(() => {

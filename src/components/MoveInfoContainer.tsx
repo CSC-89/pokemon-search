@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import transformText from "../functions/transformText";
 import pokeball from "../icons/pokeballBW.svg";
 import { MoveInterface } from "../interfaces";
@@ -24,14 +24,13 @@ const crossSVG: JSX.Element = (
   </svg>
 );
 
-const MoveInfoContainer = (props: MoveListProps) => {
-  const move = props.move;
+const MoveInfoContainer: FC<MoveListProps> = ({move, onClose}) => {
 
   const closeHandler = () => {
-    props.onClose();
+    onClose();
   };
 
-  console.log(move);
+  console.log(move.data);
 
   return (
     <>
@@ -39,7 +38,7 @@ const MoveInfoContainer = (props: MoveListProps) => {
     <div className="fixed mx-auto w-full border-2 border-slate-200 top-1 left-3 max-w-sm max-h-auto mb-5 rounded overflow-scroll shadow-xl bg-slate-50">
       <div className="flex">
         <h1 className="bg-blue-200 pt-2 pb-2 w-full">
-        <span>{move.id}:</span> {transformText(move.name)}
+        <span>{move.data!.id}:</span> {transformText(move.data!.name)}
         </h1>
         <button onClick={closeHandler} className="absolute top-1">
           {crossSVG}
@@ -47,14 +46,14 @@ const MoveInfoContainer = (props: MoveListProps) => {
       </div>
       <div className="px-6 py-4">
         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          {move.damageClass ? transformText(move.damageClass.name) : "Ability"}
+          {move.data!.damageClass ? transformText(move.data!.damageClass.name) : "Ability"}
         </span>
 
         <div className="mx-auto font-bold text-l">
-          Accuracy: {move.accuracy ? move.accuracy : "N/A"}
+          Accuracy: {move.data!.accuracy ? move.data!.accuracy : "N/A"}
         </div>
         <div className="mt-3 mx-auto text-md overflow-scroll h-96 rounded shadow-inner border p-2 mb-3">
-          {move.effectEntries}
+          {move.data!.effectEntries}
           {/** Some "Effect Entries" data is fairly rough, and hasn't been cleaned. 
             For Example "Pokemon: Meowstic Male (#678) - Move: Secret Power"*/}
         </div>

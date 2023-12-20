@@ -9,61 +9,50 @@ interface PokeProps {
   getNextorPrev: Function;
 }
 
-class SelectedMove implements MoveInterface {
-  constructor(
-    selected: boolean,
-    id?: number,
-    name?: string,
-    effectEntries?: string,
-    accuracy?: number,
-    damageClass?: string
-  ) {
-    this.selected = selected;
-    this.id = id;
-    this.name = name;
-    this.effectEntries = effectEntries;
-    this.accuracy = accuracy;
-    this.damageClass = damageClass;
-  }
-
-  selected;
-  id;
-  name;
-  effectEntries;
-  accuracy;
-  damageClass;
-}
+// const noData = {
+//   id: 0,
+//   name: "",
+//   effectEntries: "",
+//   accuracy: 0,
+//   damageClass: {
+//     name: "",
+//     url: ""
+//   },
+// };
 
 const InfoContainer = (props: PokeProps): JSX.Element => {
-  const [selectedMove, setSelectedMove] = useState(new SelectedMove(false));
+  const [selectedMove, setSelectedMove] = useState<MoveInterface>({selected: false});
 
   const pokemon: Pokemon = props.pokemon;
 
-  const clickMoveHandler = (e: any) => {
+  //Type 'Event' throws error for potential nullability.
+  const clickMoveHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
-
-    //Merge both arrays together to be filtered through
     const movesAndAbilities = [...pokemon.moves, ...pokemon.abilities];
 
     const selected = movesAndAbilities.filter((elem: any) => {
+      let button = e.target as HTMLButtonElement;
       const str: string = transformText(elem.name);
 
-      return str === e.target.outerText;
+      return str === button.outerText;
     });
 
-    //Push Selected Move into new object & state
     setSelectedMove({
       selected: true,
-      id: selected[0].id,
-      name: selected[0].name,
-      effectEntries: selected[0].effectEntries,
-      accuracy: selected[0].accuracy,
-      damageClass: selected[0].damageClass,
+      data: {
+        id: selected[0].id,
+        name: selected[0].name,
+        effectEntries: selected[0].effectEntries,
+        accuracy: selected[0].accuracy,
+        damageClass: selected[0].damageClass,
+      },
     });
   };
 
   const onClose = () => {
-    setSelectedMove(new SelectedMove(false));
+    setSelectedMove({selected: false});
   };
 
   const getNextorPrevHandler = (e: any) => {
@@ -145,7 +134,7 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
             {/** Map through MOVES array */}
             {pokemon.moves.map((elem: any, index: number) => {
               return (
-                <button key={index} onClick={clickMoveHandler}>
+                <button key={index} onClick={(e) => clickMoveHandler(e)}>
                   <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
                     {transformText(elem.name)}
                   </span>
@@ -162,7 +151,7 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
             {pokemon.abilities.length ? (
               pokemon.abilities.map((elem: any, index: number) => {
                 return (
-                  <button key={index} onClick={clickMoveHandler}>
+                  <button key={index} onClick={(e) => clickMoveHandler(e)}>
                     <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
                       {transformText(elem.name)}
                     </span>
