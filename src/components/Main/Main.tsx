@@ -4,7 +4,7 @@ import SearchBox from "../SearchBox";
 
 import axios from "axios";
 import LoadingPage from "../LoadingPage";
-import { Move, Pokemon, Ability} from "../../types";
+import { Move, Pokemon, Ability, Types} from "../../types";
 
 import "./Main.css";
 
@@ -37,7 +37,7 @@ const Main = () => {
     await axios
       .get(`https://pokeapi.co/api/v2/pokemon/${input}/`)
       .then(async (response) => {
-        const typesArr: Array<any> = [];
+        const typesArr: Array<Types> = [];
         const movesArr: Array<Move> = [];
         const abilitiesArr: Array<Ability> = [];
 

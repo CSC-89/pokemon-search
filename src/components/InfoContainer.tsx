@@ -2,23 +2,12 @@ import React, { useState } from "react";
 import transformText from "./../functions/transformText";
 import pokeball from "../icons/pokeballBW.svg";
 import MoveInfoContainer from "./MoveInfoContainer";
-import { Pokemon, MoveSelection, Move } from "../types";
+import { Pokemon, MoveSelection, Move, Ability , DamageClass} from "../types";
 
-interface PokeProps {
+type PokeProps = {
   pokemon: Pokemon;
   getNextorPrev: Function;
 }
-
-// const noData = {
-//   id: 0,
-//   name: "",
-//   effectEntries: "",
-//   accuracy: 0,
-//   damageClass: {
-//     name: "",
-//     url: ""
-//   },
-// };
 
 const InfoContainer = (props: PokeProps): JSX.Element => {
   const [selectedMove, setSelectedMove] = useState<MoveSelection>({selected: false});
@@ -32,7 +21,7 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
     e.preventDefault();
     const movesAndAbilities = [...pokemon.moves, ...pokemon.abilities];
 
-    const selected = movesAndAbilities.filter((elem: Move): boolean => {
+    const selected = movesAndAbilities.filter((elem: Move | Ability): boolean => {
       let button = e.target as HTMLButtonElement;
       const str: string = transformText(elem.name);
 
@@ -44,9 +33,9 @@ const InfoContainer = (props: PokeProps): JSX.Element => {
       data: {
         id: selected[0].id,
         name: selected[0].name,
-        effectEntries: selected[0].effectEntries,
-        accuracy: selected[0].accuracy,
-        damageClass: selected[0].damageClass,
+        effectEntries: selected[0]!.effectEntries,
+        accuracy: selected[0]!.accuracy as number,
+        damageClass: selected[0].damageClass as DamageClass,
       },
     });
   };

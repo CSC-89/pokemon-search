@@ -1,15 +1,20 @@
-type DamageClass = {
+export type DamageClass = {
   name: string,
   url: string
+}
+
+export type Types = {
+  name: string,
+  color: string
 }
 
 export type Pokemon = {
   id: number;
   name: string;
-  types: Array<string>;
+  types: Array<Types>;
   image: string;
-  moves: Array<any>;
-  abilities: Array<any>;
+  moves: Array<Move>;
+  abilities: Array<Ability>;
 }
 
 export type Ability = {
@@ -23,9 +28,9 @@ export type Ability = {
 export type Move = {
   id: number;
     name: string;
-    effectEntries: string;
+    effectEntries?: string;
     accuracy: number;
-    damageClass: DamageClass;
+    damageClass?: DamageClass;
 }
 
 export type MoveSelection = {
